@@ -60,10 +60,10 @@ public class ProjectSecurityConfig {
 //	}
 
 
-	@Bean
+	/*@Bean
 	public UserDetailsService userDetailsService(DataSource dataSource) {
 		return new JdbcUserDetailsManager(dataSource);
-	}
+	}*/
 	// This is important when you are going with approach 2
 	@Bean
 	public PasswordEncoder passwordEncoder(){
