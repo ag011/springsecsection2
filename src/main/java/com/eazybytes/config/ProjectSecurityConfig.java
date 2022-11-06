@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -32,42 +33,10 @@ public class ProjectSecurityConfig {
 				.antMatchers("/contact","/register").permitAll().and().formLogin().and().httpBasic();
 		return http.build();
 	}
-	//@Bean
-//	public InMemoryUserDetailsManager userDetailsService() {
-		//Aprroach 1
 
-/*
-      UserDetails admin = User.withDefaultPasswordEncoder()
-			  .username("admin").
-			  password("12345")
-			  .authorities("admin")
-			  .build();
-      UserDetails user = User.withDefaultPasswordEncoder()
-			  .username("user")
-			  .password("12345")
-			  .authorities("read")
-			  .build();
-      return new InMemoryUserDetailsManager(admin,user);
-*/
-
-		// Approach 2
-
-//		UserDetails admin = User.withUsername("admin").password("12345").authorities("admin").build();
-//		UserDetails user = User.withUsername("user").password("12345").authorities("read").build();
-//		return new InMemoryUserDetailsManager(admin, user);
-
-
-//	}
-
-
-	/*@Bean
-	public UserDetailsService userDetailsService(DataSource dataSource) {
-		return new JdbcUserDetailsManager(dataSource);
-	}*/
-	// This is important when you are going with approach 2
 	@Bean
 	public PasswordEncoder passwordEncoder(){
-		return NoOpPasswordEncoder.getInstance();
+		return new BCryptPasswordEncoder();
 	}
 }
 
